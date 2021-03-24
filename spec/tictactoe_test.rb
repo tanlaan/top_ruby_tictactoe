@@ -25,7 +25,7 @@ RSpec.describe Board do
 
   it 'can take a move' do
     foo = Board.new
-    foo.move([0,0], 'X')
+    foo.move([0, 0], 'X')
     expect(foo.board[0][0] == 'X').to be(true)
   end
 
@@ -34,6 +34,35 @@ RSpec.describe Board do
     expectation = "  0 1 2\n0 * * *\n1 * * *\n2 * * *\n"
     expect(foo.to_s).to eq(expectation)
 
+  end
+
+  it 'can tell if there is no winner' do
+    foo = Board.new
+    expect(foo.winner?).to eq(false)
+  end
+
+  it 'can tell if there is a horizontal winner' do
+    foo = Board.new
+    foo.move([0, 0], 'X')
+    foo.move([0, 1], 'X')
+    foo.move([0, 2], 'X')
+    expect(foo.winner?).to eq(true) 
+  end
+
+  it 'can tell if there is a vertical winner' do
+    foo = Board.new
+    foo.move([0, 0], 'X')
+    foo.move([1, 0], 'X')
+    foo.move([2, 0], 'X')
+    expect(foo.winner?).to eq(true) 
+  end
+  
+  it 'can tell if there is a diagonal winner' do
+    foo = Board.new
+    foo.move([0, 0], 'X')
+    foo.move([1, 1], 'X')
+    foo.move([2, 2], 'X')
+    expect(foo.winner?).to eq(true) 
   end
 
 end
