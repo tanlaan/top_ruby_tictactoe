@@ -12,6 +12,15 @@ class Board
     x, y = coordinate
     board[x][y] = character
   end
+
+  def to_s
+    board_string = "  0 1 2\n"
+    board.each.with_index do |row, index| 
+      board_string += index.to_s + " " + row.map{|space| space.nil? ? '*' : space}.join(' ') + "\n"
+    end
+    board_string
+  end
+
 end
 
 # Board class
