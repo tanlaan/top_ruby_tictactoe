@@ -22,7 +22,11 @@ class Board
   end
 
   def winner?
-    # Returns player character. e.g. 'X'
+    !!winner
+  end
+
+  def winner
+    # return player's character (since we don't know their name at this level)
     horizontal(board) || vertical(board) || diagonal(board)
   end
 
@@ -30,21 +34,24 @@ class Board
 
   def horizontal(board)
     board.each do |row|
-      return row.uniq if row_match(row)
+      return row.uniq[0] if row_match(row)
     end
+    nil
   end
 
   def vertical(board)
     board.transpose.each do |row|
-      return row.uniq if row_match(row)
+      return row.uniq[0] if row_match(row)
     end
+    nil
   end
 
   def diagonal(board)
     diagonals = [board[0][0], board[1][1], board[2][2]], [board[2][0], board[1][1], board[2][0]]
     diagonals.each do |row|
-      return row.uniq if row_match(row)
+      return row.uniq[0] if row_match(row)
     end
+    nil
   end
 
   def row_match(row)
