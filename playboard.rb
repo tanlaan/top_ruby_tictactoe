@@ -13,6 +13,11 @@ class Board
     board[x][y] = character
   end
 
+  def valid_move?(coordinate)
+    x, y = coordinate
+    board[x][y].nil?
+  end
+
   def to_s
     board_string = "  0 1 2\n"
     board.each.with_index do |row, index|
